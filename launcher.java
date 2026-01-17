@@ -4,13 +4,13 @@ import java.util.Scanner;
 public class launcher {
     public static void main(String[] args) {
         try {
-            String[] ListOfOperations = { "" };
+            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool" };
             Scanner in = new Scanner(System.in);
             int userInput;
 
             while (true) {
                 System.out.println("Please make a choice from the following list.");
-                System.out.println("    0: Quit");  
+                System.out.println("    0: Quit");
                 System.out.println("    1: Run TaskManager");
                 System.out.println("    2: Run Notepad");
                 System.out.println("    4: Run Snipping Tool");
@@ -24,7 +24,7 @@ public class launcher {
                     if (in.hasNextInt()) {
                         userInput = in.nextInt();
                         if (userInput <= 8) {
-                            break;// breaks out the while loop straight to line 32
+                            break;// breaks out the while loop straight to line 35
                         }
                     } else {
                         in.next(); // this consume non-int tokens
@@ -36,25 +36,34 @@ public class launcher {
                     System.exit(0);
                 }
 
-               
-
                 if (userInput == 1) { // open task manager
-                    ProcessBuilder pb = new ProcessBuilder("taskmgr");
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
                     Process p = pb.start();
                     System.out.println("Started program 1 with pid = " + p.pid());
-                } 
+                }
 
-                if(userInput == 2)
-                {
-                    ProcessBuilder pb = new ProcessBuilder("notepad");
+                if (userInput == 2) {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]);
                     Process p = pb.start();
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
 
-                if(userInput == 3)
-                {
-                    ProcessBuilder pb = new ProcessBuilder("charmap"); // ProcessBuilder allows to start a new process
+                if (userInput == 3) {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]); // ProcessBuilder allows to start a new
+                                                                                 // process
                     Process p = pb.start(); // starts the process
+                    System.out.println("Start program 1 with pid = " + p.pid());
+                }
+
+                if (userInput == 4) {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
+                    Process p = pb.start();
+                    System.out.println("Start program 1 with pid = " + p.pid());
+                }
+
+                if (userInput == 4) {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[5]);
+                    Process p = pb.start();
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
 
