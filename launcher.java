@@ -37,32 +37,32 @@ public class launcher {
                 }
 
                 if (userInput == 1) { // open task manager
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[0]);
                     Process p = pb.start();
                     System.out.println("Started program 1 with pid = " + p.pid());
                 }
 
                 if (userInput == 2) {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]);
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
                     Process p = pb.start();
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
 
                 if (userInput == 3) {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]); // ProcessBuilder allows to start a new
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]); // ProcessBuilder allows to start a new
                                                                                  // process
                     Process p = pb.start(); // starts the process
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
 
                 if (userInput == 4) {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]);
                     Process p = pb.start();
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
 
                 if (userInput == 4) {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[5]);
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
                     Process p = pb.start();
                     System.out.println("Start program 1 with pid = " + p.pid());
                 }
