@@ -15,7 +15,7 @@ public class launcher {
         System.out.println("    *8: Run Cmd shell");
         System.out.print("Enter your choice: ");
 
-        while (!in.hasNextInt()) {
+        while ((!in.hasNextInt()) || in.nextInt() > 9) {
             in.nextLine();
             System.out.print("Enter your choice: ");
         }
