@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class launcher {
     public static void main(String[] args) {
         try {
-            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool" };
+            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver" };
             Scanner in = new Scanner(System.in);
             int userInput;
 
@@ -45,26 +45,40 @@ public class launcher {
                 if (userInput == 2) {
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
                     Process p = pb.start();
-                    System.out.println("Start program 1 with pid = " + p.pid());
+                    System.out.println("Start program 2 with pid = " + p.pid());
                 }
 
                 if (userInput == 3) {
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]); // ProcessBuilder allows to start a new
                                                                                  // process
                     Process p = pb.start(); // starts the process
-                    System.out.println("Start program 1 with pid = " + p.pid());
+                    System.out.println("Start program 3 with pid = " + p.pid());
                 }
 
                 if (userInput == 4) {
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]);
                     Process p = pb.start();
-                    System.out.println("Start program 1 with pid = " + p.pid());
+                    System.out.println("Start program 4 with pid = " + p.pid());
                 }
 
                 if (userInput == 4) {
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
                     Process p = pb.start();
-                    System.out.println("Start program 1 with pid = " + p.pid());
+                    System.out.println("Start program 5 with pid = " + p.pid());
+                }
+
+                if(userInput == 5)
+                {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[5]);
+                    Process p = pb.start();
+                    System.out.println("Start program 6 with pid = " + p.pid());
+                }
+
+                if(userInput == 6)
+                {
+                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
+                    Process p = pb.start();
+                    System.err.println("Start program 7 with pid = " + p.pid());
                 }
 
             }
