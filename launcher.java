@@ -14,11 +14,11 @@ public class launcher {
                 System.out.println("    0: Quit");
                 System.out.println("    1: Run TaskManager");
                 System.out.println("    2: Run Notepad");
-                System.out.println("    4: Run Snipping Tool");
-                System.out.println("    5: Run \"About Windows\"");
-                System.out.println("    6: Run \"System Information\"");
-                System.out.println("    *7: Run NS Lookup");
-                System.out.println("    *8: Run Cmd shell");
+                System.out.println("    3: Run Snipping Tool");
+                System.out.println("    4: Run \"About Windows\"");
+                System.out.println("    5: Run \"System Information\"");
+                System.out.println("    *6: Run NS Lookup");
+                System.out.println("    *7: Run Cmd shell");
                 System.out.print("Enter your choice: ");
 
                 while (true) { // while true is to keep the prompt if requirements are not met
