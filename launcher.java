@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class launcher {
     public static void main(String[] args) {
         try {
-            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver" };
+            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver",
+                    "nslookup" };
             Scanner in = new Scanner(System.in);
             int userInput;
 
@@ -42,43 +43,52 @@ public class launcher {
                     System.out.println("Started program 1 with pid = " + p.pid());
                 }
 
-                if (userInput == 2) {
+                if (userInput == 2) { // open note pad
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
                     Process p = pb.start();
                     System.out.println("Start program 2 with pid = " + p.pid());
                 }
 
-                if (userInput == 3) {
+                if (userInput == 3) { // open character map
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]); // ProcessBuilder allows to start a new
                                                                                  // process
                     Process p = pb.start(); // starts the process
                     System.out.println("Start program 3 with pid = " + p.pid());
                 }
 
-                if (userInput == 4) {
+                if (userInput == 4) { // open snipping tool
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]);
                     Process p = pb.start();
                     System.out.println("Start program 4 with pid = " + p.pid());
                 }
 
-                if (userInput == 4) {
+                if (userInput == 4) { // open msinfo
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
                     Process p = pb.start();
                     System.out.println("Start program 5 with pid = " + p.pid());
                 }
 
-                if(userInput == 5)
+                if (userInput == 5) // open winver
                 {
                     ProcessBuilder pb = new ProcessBuilder(ListOfOperations[5]);
                     Process p = pb.start();
                     System.out.println("Start program 6 with pid = " + p.pid());
                 }
 
-                if(userInput == 6)
-                {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
-                    Process p = pb.start();
-                    System.err.println("Start program 7 with pid = " + p.pid());
+                if (userInput == 6) {
+                    try {
+
+                        ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
+                        pb.inheritIO();
+                        Process p = pb.start();
+                        int exitCode = p.waitFor();
+                        if (exitCode == 0) {
+                            System.out.println("Exit code" + exitCode);
+                        }
+                    } catch (InterruptedException e) {
+                        System.out.println("Failed to start" + e.getMessage());
+                    }
+
                 }
 
             }
