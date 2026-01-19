@@ -1,12 +1,36 @@
+/*
+
+
+*/
+
 import java.io.IOException;
 import java.util.Scanner;
 
-public class launcher {
+/**
+ * This program uses the Java Process API
+ * to run several Windows programs.
+ * See
+ * https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ProcessBuilder.html
+ * https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Process.html
+ */
+
+public class Launcher {
+    private final static Scanner in = new Scanner(System.in);
+    private final static String[] cmds = { "Taskmgr.exe",
+            "notepad.exe",
+            "charmap.exe",
+            "SnippingTool.exe",
+            "winver.exe",
+            "msinfo32.exe",
+            "nslookup.exe",
+            "cmd.exe"
+    };
+
     public static void main(String[] args) {
         try {
-            String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver",
-                    "nslookup", "cmd" };
-            Scanner in = new Scanner(System.in);
+            final String systemDrive = System.getenv("SystemDrive");
+            final String system32 = systemDrive + "\\Windows\\system32\\";
+
             int userInput;
 
             while (true) {
@@ -39,39 +63,39 @@ public class launcher {
                 }
 
                 if (userInput == 1) { // open task manager
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[0]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[0]);
                     Process p = pb.start();
                     System.out.println("Started program 1 with pid = " + p.pid());
                 }
 
                 if (userInput == 2) { // open note pad
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[1]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[1]);
                     Process p = pb.start();
                     System.out.println("Start program 2 with pid = " + p.pid());
                 }
 
                 if (userInput == 3) { // open character map
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[2]); // ProcessBuilder allows to start a new
-                                                                                 // process
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[2]); // ProcessBuilder allows to start a new
+                                                                                // process
                     Process p = pb.start(); // starts the process
                     System.out.println("Start program 3 with pid = " + p.pid());
                 }
 
                 if (userInput == 4) { // open snipping tool
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[3]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[3]);
                     Process p = pb.start();
                     System.out.println("Start program 4 with pid = " + p.pid());
                 }
 
                 if (userInput == 5) { // open msinfo
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[4]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[4]);
                     Process p = pb.start();
                     System.out.println("Start program 5 with pid = " + p.pid());
                 }
 
                 if (userInput == 6) // open winver
                 {
-                    ProcessBuilder pb = new ProcessBuilder(ListOfOperations[5]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[5]);
                     Process p = pb.start();
                     System.out.println("Start program 6 with pid = " + p.pid());
                 }
@@ -79,7 +103,7 @@ public class launcher {
                 if (userInput == 7) {
                     try {
 
-                        ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
+                        ProcessBuilder pb = new ProcessBuilder(system32 + cmds[6]);
                         pb.inheritIO();
                         Process p = pb.start();
                         System.out.println("Started program 7 with pid =" + p.pid());
@@ -94,8 +118,9 @@ public class launcher {
 
                 if (userInput == 8) {
                     try {
-                        ProcessBuilder pb = new ProcessBuilder(ListOfOperations[7]);
+                        ProcessBuilder pb = new ProcessBuilder(system32 + cmds[7]);
                         pb.inheritIO();
+
                         Process p = pb.start();
                         System.out.println("Started program 8 with pid =" + p.pid());
                         System.out.println("Launcher waiting on Program 8...");
