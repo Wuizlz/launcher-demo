@@ -82,9 +82,9 @@ public class launcher {
                         ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
                         pb.inheritIO();
                         Process p = pb.start();
-                        p.waitFor();
                         System.out.println("Started program 7 with pid =" + p.pid());
                         System.out.println("Launcher waiting on Program 7...");
+                        p.waitFor();
 
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
@@ -97,10 +97,10 @@ public class launcher {
                         ProcessBuilder pb = new ProcessBuilder(ListOfOperations[7]);
                         pb.inheritIO();
                         Process p = pb.start();
-                        p.waitFor();
                         System.out.println("Started program 8 with pid =" + p.pid());
                         System.out.println("Launcher waiting on Program 8...");
-                        
+                        p.waitFor();
+
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
                     }
