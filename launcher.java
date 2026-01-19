@@ -5,7 +5,7 @@ public class launcher {
     public static void main(String[] args) {
         try {
             String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver",
-                    "nslookup" };
+                    "nslookup", "cmd"  };
             Scanner in = new Scanner(System.in);
             int userInput;
 
@@ -82,14 +82,27 @@ public class launcher {
                         ProcessBuilder pb = new ProcessBuilder(ListOfOperations[6]);
                         pb.inheritIO();
                         Process p = pb.start();
-                        int exitCode = p.waitFor();
-                        if (exitCode == 0) {
-                            System.out.println("Exit code" + exitCode);
-                        }
+                        p.waitFor();
+
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
                     }
 
+                }
+
+                if (userInput == 8)
+                {
+                    try
+                    {
+                        ProcessBuilder pb = new ProcessBuilder(ListOfOperations[7]);
+                        pb.inheritIO();
+                        Process p = pb.start();
+                        p.waitFor();
+                    }
+                    catch(InterruptedException e)
+                    {
+                        System.out.println("Failed to start" + e.getMessage());
+                    }
                 }
 
             }
