@@ -5,7 +5,7 @@ public class launcher {
     public static void main(String[] args) {
         try {
             String[] ListOfOperations = { "taskmgr", "notepad", "charmap", "SnippingTool", "msinfo32", "winver",
-                    "nslookup", "cmd"  };
+                    "nslookup", "cmd" };
             Scanner in = new Scanner(System.in);
             int userInput;
 
@@ -83,6 +83,8 @@ public class launcher {
                         pb.inheritIO();
                         Process p = pb.start();
                         p.waitFor();
+                        System.out.println("Started program 7 with pid =" + p.pid());
+                        System.out.println("Launcher waiting on Program 7...");
 
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
@@ -90,17 +92,16 @@ public class launcher {
 
                 }
 
-                if (userInput == 8)
-                {
-                    try
-                    {
+                if (userInput == 8) {
+                    try {
                         ProcessBuilder pb = new ProcessBuilder(ListOfOperations[7]);
                         pb.inheritIO();
                         Process p = pb.start();
                         p.waitFor();
-                    }
-                    catch(InterruptedException e)
-                    {
+                        System.out.println("Started program 8 with pid =" + p.pid());
+                        System.out.println("Launcher waiting on Program 8...");
+                        
+                    } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
                     }
                 }
