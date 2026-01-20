@@ -19,7 +19,7 @@ public class Launcher {
     private final static String[] cmds = { "Taskmgr.exe",
             "notepad.exe",
             "charmap.exe",
-            "snippingTool.exe",
+            "SnippingTool.exe",
             "winver.exe",
             "msinfo32.exe",
             "nslookup.exe",
@@ -34,7 +34,8 @@ public class Launcher {
             int userInput;
 
             while (true) {
-                System.out.println("Please make a choice from the following list.\n  0: Quit\n  1: Run TaskManager\n  3: Run Character Map\n  4: Run Snipping Tool\n  5: Run \"About Windows\"  *7: Run NS Lookup\n  Enter your choice");
+                System.out.println(
+                        "Please make a choice from the following list.\n  0: Quit\n  1: Run TaskManager\n  3: Run Character Map\n  4: Run Snipping Tool\n  5: Run \"About Windows\"  *7: Run NS Lookup\n  Enter your choice");
 
                 while (true) { // while true is to keep the prompt if requirements are not met
                     if (in.hasNextInt()) {
@@ -77,27 +78,28 @@ public class Launcher {
                     System.out.println("Start program 4 with pid = " + p.pid());
                 }
 
-                if (userInput == 5) { // open msinfo
+                if (userInput == 5) { // open winver
                     ProcessBuilder pb = new ProcessBuilder(system32 + cmds[4]);
                     Process p = pb.start();
                     System.out.println("Start program 5 with pid = " + p.pid());
                 }
 
-                if (userInput == 6) // open winver
+                if (userInput == 6) // open msinfo
                 {
                     ProcessBuilder pb = new ProcessBuilder(system32 + cmds[5]);
                     Process p = pb.start();
                     System.out.println("Start program 6 with pid = " + p.pid());
                 }
 
-                if (userInput == 7) {
+                if (userInput == 7) { // start nslookup
                     try {
 
                         ProcessBuilder pb = new ProcessBuilder(system32 + cmds[6]);
-                        pb.inheritIO();
+
                         Process p = pb.start();
                         System.out.println("Started program 7 with pid =" + p.pid());
                         System.out.println("Launcher waiting on Program 7...");
+                        pb.inheritIO();
                         p.waitFor();
 
                     } catch (InterruptedException e) {
@@ -106,14 +108,14 @@ public class Launcher {
 
                 }
 
-                if (userInput == 8) {
+                if (userInput == 8) { // start cmd
                     try {
                         ProcessBuilder pb = new ProcessBuilder(system32 + cmds[7]);
-                        pb.inheritIO();
 
                         Process p = pb.start();
                         System.out.println("Started program 8 with pid =" + p.pid());
                         System.out.println("Launcher waiting on Program 8...");
+                        pb.inheritIO();
                         p.waitFor();
 
                     } catch (InterruptedException e) {
