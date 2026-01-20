@@ -99,9 +99,9 @@ public class Launcher {
                         Process p = pb.start();
 
                         System.out.println("Started program 7 with pid = " + p.pid());
-
+                        System.out.flush();
                         System.out.println("Launcher waiting on Program 7...");
-
+                        System.out.flush();
                         p.waitFor();
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
