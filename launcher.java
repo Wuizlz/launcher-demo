@@ -19,7 +19,7 @@ public class Launcher {
     private final static String[] cmds = { "Taskmgr.exe",
             "notepad.exe",
             "charmap.exe",
-            "SnippingTool.exe",
+            "snippingTool.exe",
             "winver.exe",
             "msinfo32.exe",
             "nslookup.exe",
@@ -34,17 +34,7 @@ public class Launcher {
             int userInput;
 
             while (true) {
-                System.out.println("Please make a choice from the following list.");
-                System.out.println("  0: Quit");
-                System.out.println("  1: Run TaskManager");
-                System.out.println("  2: Run Notepad");
-                System.out.println("  3: Run Character Map");
-                System.out.println("  4: Run Snipping Tool");
-                System.out.println("  5: Run \"About Windows\"");
-                System.out.println("  6: Run \"System Information\"");
-                System.out.println(" *7: Run NS Lookup");
-                System.out.println(" *8: Run Cmd shell");
-                System.out.print("Enter your choice: ");
+                System.out.println("Please make a choice from the following list.\n  0: Quit\n  1: Run TaskManager\n  3: Run Character Map\n  4: Run Snipping Tool\n  5: Run \"About Windows\"  *7: Run NS Lookup\n  Enter your choice");
 
                 while (true) { // while true is to keep the prompt if requirements are not met
                     if (in.hasNextInt()) {
