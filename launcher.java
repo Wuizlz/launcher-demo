@@ -95,11 +95,10 @@ public class Launcher {
                     try {
 
                         ProcessBuilder pb = new ProcessBuilder(system32 + cmds[6]);
-                        pb.inheritIO();
                         Process p = pb.start();
-                        
                         System.out.println("Started program 7 with pid = " + p.pid());
                         System.out.println("Launcher waiting on Program 7...");
+                        pb.inheritIO();
                         p.waitFor();
 
                     } catch (InterruptedException e) {
