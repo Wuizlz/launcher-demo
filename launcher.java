@@ -97,12 +97,17 @@ public class Launcher {
                         ProcessBuilder pb = new ProcessBuilder(system32 + cmds[6]);
                         pb.inheritIO();
                         Process p = pb.start();
-
                         System.out.println("Started program 7 with pid = " + p.pid());
-                        System.out.flush();
                         System.out.println("Launcher waiting on Program 7...");
-                        System.out.flush();
                         p.waitFor();
+
+                        int exitValue = p.exitValue();
+
+                        if (exitValue == 0) {
+
+                            p.info().totalCpuDuration().ifPresent(d -> System.out.println("CPU ms: " + d.toMillis()));
+                        }
+
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
                     }
@@ -115,10 +120,16 @@ public class Launcher {
                         pb.inheritIO();
                         Process p = pb.start();
                         System.out.println("Started program 8 with pid = " + p.pid());
-
                         System.out.println("Launcher waiting on Program 8...");
-
+                        System.out.println();
                         p.waitFor();
+
+                        int exitValue = p.exitValue();
+
+                        if(exitValue == 0)
+                        {
+                            p.info().totalCpuDuration().ifPresent(d -> System.out.println("CPU ms: " + d.toMillis()));
+                        }
 
                     } catch (InterruptedException e) {
                         System.out.println("Failed to start" + e.getMessage());
