@@ -46,7 +46,7 @@ public class Launcher {
                     } else {
                         in.next(); // this consume non-int tokens
                     }
-                    System.out.print("Enter your choice: "); // prompt is asked again before while loop is ran again
+                    System.out.print("Enter your choice:"); // prompt is asked again before while loop is ran again
                 }
 
                 if (userInput == 0) { // exit out of program
@@ -107,7 +107,7 @@ public class Launcher {
                         if (exitValue == 0) {
 
                             p.info().totalCpuDuration().ifPresent(
-                                    d -> System.out.println("Program 7 exited with return value 0 and ran for "
+                                    d -> System.out.println("Program 7 exited with return value 0 and ran for\n "
                                             + d.toMillis() + " cpu miliseconds"));
                         }
 
@@ -130,8 +130,8 @@ public class Launcher {
                         int exitValue = p.exitValue();
 
                         if (exitValue == 0) {
-                           p.info().totalCpuDuration().ifPresent(
-                                    d -> System.out.println("Program 8 exited with return value 0 and ran for "
+                            p.info().totalCpuDuration().ifPresent(
+                                    d -> System.out.println("Program 8 exited with return value 0 and ran for\n "
                                             + d.toMillis() + " cpu miliseconds"));
                         }
 
