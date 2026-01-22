@@ -131,7 +131,7 @@ public class Launcher {
 
                         if (exitValue == 0) {
                             p.info().totalCpuDuration().ifPresent(
-                                    d -> System.out.println("Program 8 exited with return value 0 and ran for\n "
+                                    d -> System.out.println("Program 8 exited with return value 0 and ran for "
                                             + d.toMillis() + " cpu miliseconds\n"));
                         }
 
