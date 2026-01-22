@@ -19,7 +19,7 @@ public class Launcher {
     private final static String[] cmds = { "Taskmgr.exe",
             "notepad.exe",
             "charmap.exe",
-            "SnippingTool",
+            "perfmon.exe",
             "winver.exe",
             "msinfo32.exe",
             "nslookup.exe",
@@ -73,7 +73,7 @@ public class Launcher {
                 }
 
                 if (userInput == 4) { // open snipping tool
-                    ProcessBuilder pb = new ProcessBuilder(cmds[3]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[3]);
                     Process p = pb.start();
                     System.out.println("Start program 4 with pid = " + p.pid());
                 }
