@@ -107,8 +107,8 @@ public class Launcher {
                         if (exitValue == 0) {
 
                             p.info().totalCpuDuration().ifPresent(
-                                    d -> System.out.println("Program 7 exited with return value 0 and ran for\n "
-                                            + d.toMillis() + " cpu miliseconds"));
+                                    d -> System.out.println("Program 7 exited with return value 0 and ran for"
+                                            + d.toMillis() + " cpu miliseconds\n"));
                         }
 
                     } catch (InterruptedException e) {
@@ -132,7 +132,7 @@ public class Launcher {
                         if (exitValue == 0) {
                             p.info().totalCpuDuration().ifPresent(
                                     d -> System.out.println("Program 8 exited with return value 0 and ran for\n "
-                                            + d.toMillis() + " cpu miliseconds"));
+                                            + d.toMillis() + " cpu miliseconds\n"));
                         }
 
                     } catch (InterruptedException e) {
