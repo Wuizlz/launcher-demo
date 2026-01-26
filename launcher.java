@@ -75,7 +75,7 @@ public class Launcher {
         if (userInput == 0)
             System.exit(0);
         try {
-            if (userInput != 7 || userInput != 8) {
+            if (userInput < 7) {
 
                 ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
                 Process p = pb.start();
@@ -83,7 +83,7 @@ public class Launcher {
 
             } else {
                 try {
-
+                    System.out.println("test");
                     ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
                     pb.inheritIO();
                     Process p = pb.start();
@@ -103,11 +103,13 @@ public class Launcher {
                     }
 
                 } catch (InterruptedException e) {
-                    System.out.println("Failed to start" + e.getMessage());
+                    System.out.println("Failed, " + e.getMessage());
+                    System.exit(0);
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Failed, " + e.getMessage());
+            System.exit(0);
         }
     }
 
