@@ -34,7 +34,7 @@ public class Launcher {
             int userInput;
 
             while (true) {
-                System.out.println();
+
                 System.out.print(
                         "Please make a choice from the following list.\n  0: Quit\n  1: Run Task Manager\n  2: Run Notepad\n  3: Run Character Map\n  4: Run Sound Volume\n  5: Run \"About Windows\"\n  6: Run \"System Information\"\n *7: Run NS Lookup\n *8: Run Cmd Shell \nEnter your choice:");
 
@@ -52,7 +52,7 @@ public class Launcher {
 
                 if (userInput == 0) { // exit out of program
                     System.exit(0);
-                    
+
                 }
 
                 if (userInput == 1) { // open task manager
@@ -141,6 +141,8 @@ public class Launcher {
                         System.out.println("Failed to start" + e.getMessage());
                     }
                 }
+
+                System.out.println();
 
             }
         } catch (IOException e) {
