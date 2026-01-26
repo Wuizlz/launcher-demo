@@ -77,14 +77,14 @@ public class Launcher {
         try {
             if (userInput != 7 || userInput != 8) {
 
-                ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput]);
+                ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
                 Process p = pb.start();
                 System.out.println("Started program " + userInput + " with pid = " + p.pid());
 
             } else {
                 try {
 
-                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput]);
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
                     pb.inheritIO();
                     Process p = pb.start();
                     System.out.println("Started program " + userInput + " with pid = " + p.pid());
