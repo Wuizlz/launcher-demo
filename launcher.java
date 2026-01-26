@@ -34,7 +34,7 @@ public class Launcher {
             int userInput;
 
             while (true) {
-                System.out.print(
+                System.out.println(
                         "Please make a choice from the following list.\n  0: Quit\n  1: Run Task Manager\n  2: Run Notepad\n  3: Run Character Map\n  4: Run Sound Volume\n  5: Run \"About Windows\"\n  6: Run \"System Information\"\n *7: Run NS Lookup\n *8: Run Cmd Shell \nEnter your choice:");
 
                 while (true) { // while true is to keep the prompt if requirements are not met
