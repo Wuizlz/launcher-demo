@@ -39,8 +39,8 @@ public class Launcher {
             "  4: Run Sound Volume",
             "  5: Run \"About Windows\"",
             "  6: Run \"System Information\"",
-            "  7: Run NS Lookup",
-            "  8: Run Cmd Shell",
+            " *7: Run NS Lookup",
+            " *8: Run Cmd Shell",
             "Enter your choice: ");
 
     private static void HandleInput() {
@@ -66,18 +66,45 @@ public class Launcher {
             }
 
             InitilizeProcess(userInput);
+            System.out.println();
         }
 
     }
 
     private static void InitilizeProcess(int userInput) {
+        if (userInput == 0)
+            System.exit(0);
         try {
-
             if (userInput != 7 || userInput != 8) {
+
                 ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput]);
                 Process p = pb.start();
                 System.out.println("Started program " + userInput + " with pid = " + p.pid());
 
+            } else {
+                try {
+
+                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput]);
+                    pb.inheritIO();
+                    Process p = pb.start();
+                    System.out.println("Started program " + userInput + " with pid = " + p.pid());
+                    System.out.println("Launcher waiting on Program " + userInput + "...");
+                    System.out.println();
+                    p.waitFor();
+
+                    int exitValue = p.exitValue();
+
+                    if (exitValue == 0) {
+
+                        p.info().totalCpuDuration().ifPresent(
+                                d -> System.out
+                                        .println("Program " + userInput + " exited with return value 0 and ran for "
+                                                + d.toMillis() + " cpu miliseconds\n"));
+                    }
+
+                } catch (InterruptedException e) {
+                    System.out.println("Failed to start" + e.getMessage());
+                }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
