@@ -3,7 +3,7 @@
     Course: CS 33600
     Name: Daniel Briseno
     Email: dbriseno@pnw.edu
-    Assignment: 0
+    Assignment: 1
 */
 import java.io.IOException;
 import java.util.Scanner;
