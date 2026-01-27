@@ -83,13 +83,11 @@ public class Launcher {
 
             } else {
                 try {
-                    System.out.println("test");
                     ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
                     pb.inheritIO();
                     Process p = pb.start();
                     System.out.println("Started program " + userInput + " with pid = " + p.pid());
                     System.out.println("Launcher waiting on Program " + userInput + "...");
-                    System.out.println();
                     p.waitFor();
 
                     int exitValue = p.exitValue();
