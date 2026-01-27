@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class Launcher {
     private final static Scanner in = new Scanner(System.in);
 
+    // exit option
+    private static final int EXIT_OPTION = 0;
+
     // range for the options
     private static final int MIN_OPTION = 0;
     private static final int MAX_OPTION = 8;
@@ -43,8 +46,9 @@ public class Launcher {
             " *8: Run Cmd Shell",
             "Enter your choice: ");
 
-    private static void HandleInput() {
-        while (true) {
+    private static void handleInput() {
+        boolean done = false;
+        while (!done) {
 
             int userInput = -1;
             boolean valid = false;
@@ -64,54 +68,48 @@ public class Launcher {
                     System.out.print("Enter your choice: ");
                 }
             }
+            if (userInput == EXIT_OPTION) {
+                done = true;
+            } else {
+                initializeProcess(userInput);
+                System.out.println();
+            }
 
-            InitilizeProcess(userInput);
-            System.out.println();
         }
 
     }
 
-    private static void InitilizeProcess(int userInput) {
-        if (userInput == 0)
-            System.exit(0);
+    private static void initializeProcess(int userInput) {
         try {
-            if (userInput < 7) {
+            ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
+            if (userInput >= MAX_OPTION - 1) {
+                pb.inheritIO();
+            }
+            Process p = pb.start();
+            System.out.println("Started program " + userInput + " with pid = " + p.pid());
 
-                ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-                Process p = pb.start();
-                System.out.println("Started program " + userInput + " with pid = " + p.pid());
+            if (userInput >= MAX_OPTION - 1) {
+                System.out.println("Launcher waiting on Program " + userInput + "...");
+                System.out.println();
+                p.waitFor();
 
-            } else {
-                try {
-                    ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-                    pb.inheritIO();
-                    Process p = pb.start();
-                    System.out.println("Started program " + userInput + " with pid = " + p.pid());
-                    System.out.println("Launcher waiting on Program " + userInput + "...");
-                    p.waitFor();
+                int exitValue = p.exitValue();
 
-                    int exitValue = p.exitValue();
+                if (exitValue == EXIT_OPTION) {
 
-                    if (exitValue == 0) {
-
-                        p.info().totalCpuDuration().ifPresent(
-                                d -> System.out
-                                        .println("Program " + userInput + " exited with return value 0 and ran for "
-                                                + d.toMillis() + " cpu miliseconds\n"));
-                    }
-
-                } catch (InterruptedException e) {
-                    System.out.println("Failed, " + e.getMessage());
-                    System.exit(0);
+                    p.info().totalCpuDuration().ifPresent(
+                            d -> System.out
+                                    .println("Program " + userInput + " exited with return value 0 and ran for "
+                                            + d.toMillis() + " cpu miliseconds\n"));
                 }
             }
-        } catch (IOException e) {
+
+        } catch (IOException | InterruptedException e) {
             System.out.println("Failed, " + e.getMessage());
-            System.exit(0);
         }
     }
 
     public static void main(String[] args) {
-        HandleInput();
+        handleInput();
     }
 }
