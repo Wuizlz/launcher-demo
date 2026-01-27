@@ -34,12 +34,8 @@ Notes:
 
 ## Process tree / activity monitor notes (for screenshots)
 
-When you include screenshots of Activity Monitor / Task Manager / Process Explorer, you can explain the process tree like this:
+<img width="395" height="251" alt="Screenshot 2026-01-26 at 10 20 02 PM" src="https://github.com/user-attachments/assets/cd8b2138-7c98-4b04-9a8e-78bbc6217ae0" />
 
-1. **Windows Explorer (`explorer.exe`) is the top-level parent** when you launch the terminal from the file explorer (for example, by double-clicking `launcher_demo.cmd` in a folder). Explorer is the process that started your terminal, so it appears as the parent in a typical process tree view.
-2. **Terminal app is the next process** (e.g., Windows Terminal, PowerShell, or Command Prompt). It is shown as a child of Explorer when it was launched from Explorer.
-3. **`cmd.exe` (or the shell) appears beneath the terminal**, because the terminal hosts or starts the shell session.
-4. **The launched program is a child of `cmd.exe`** (e.g., `Launcher.jar` -> `java.exe` -> `Taskmgr.exe`).
 
 ### Why siblings can appear
 
