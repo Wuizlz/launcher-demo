@@ -126,13 +126,16 @@ https://github.com/user-attachments/assets/60a39cda-96b1-4307-aa21-4b0a41178481
 From a command prompt in this directory:
 
 ```cmd
-launcher_demo.cmd
+.\launcher_demo
 ```
 
 Or directly:
 
 ```cmd
 java -jar Launcher.jar
+AND
+javac Launcher.java
+java Launcher
 ```
 
 ## Files of interest
