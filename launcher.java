@@ -12,7 +12,7 @@ public class Launcher {
     private final static Scanner in = new Scanner(System.in);
 
     // exit option
-    private static final int EXIT_OPTION = 0;
+    private static final int EXIT_OPTION = 0; // defined exit option
 
     // range for the options
     private static final int MIN_OPTION = 0;
@@ -22,7 +22,7 @@ public class Launcher {
     final static String systemDrive = System.getenv("SystemDrive");
     final static String system32 = systemDrive + "\\Windows\\system32\\";
 
-    // list of commands
+    // array of executables
     private final static String[] cmds = { "Taskmgr.exe",
             "notepad.exe",
             "charmap.exe",
@@ -33,6 +33,7 @@ public class Launcher {
             "cmd.exe"
     };
 
+    // defined prompt message for reusability
     private static final String MENU_TEXT = String.join("\n",
             "Please make a choice from the following list.",
             "  0: Quit",
@@ -46,32 +47,32 @@ public class Launcher {
             " *8: Run Cmd Shell",
             "Enter your choice: ");
 
-    private static void handleInput() {
+    private static void handleInput() { // function to start prompt towards user
         boolean done = false;
-        while (!done) {
+        while (!done) { // runs when not done
 
             int userInput = -1;
             boolean valid = false;
 
             System.out.print(MENU_TEXT);
 
-            while (!valid) {
-                if (in.hasNextInt()) {
-                    userInput = in.nextInt();
+            while (!valid) { // runs when not valid number
+                if (in.hasNextInt()) { // checks if int in next token
+                    userInput = in.nextInt(); // swallos it
                     if (userInput >= MIN_OPTION && userInput <= MAX_OPTION) {
-                        valid = true;
+                        valid = true; // set to true to escape loop
                     } else {
-                        System.out.print("Enter your choice: ");
+                        System.out.print("Enter your choice: "); // bad input -> prompts then hits loop again
                     }
                 } else {
                     in.next();
-                    System.out.print("Enter your choice: ");
+                    System.out.print("Enter your choice: "); // input wasnt an int -> prompts then hits loop again
                 }
             }
-            if (userInput == EXIT_OPTION) {
+            if (userInput == EXIT_OPTION) { // once valid check if input is 0 to exit
                 done = true;
             } else {
-                initializeProcess(userInput);
+                initializeProcess(userInput); // enter function to handle process
                 System.out.println();
             }
 
@@ -81,21 +82,26 @@ public class Launcher {
 
     private static void initializeProcess(int userInput) {
         try {
+            // instance of ProcessBuilder with command path
             ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-            if (userInput >= MAX_OPTION - 1) {
+            if (userInput >= MAX_OPTION - 1) { //specifically for launcher programs
+                /* for the sub-process to utilize parents IO field as well(causes a race of what
+                 to print to system */
                 pb.inheritIO();
             }
-            Process p = pb.start();
+            //starts the actual instance with appropiate command path
+            Process p = pb.start(); 
             System.out.println("Started program " + userInput + " with pid = " + p.pid());
 
-            if (userInput >= MAX_OPTION - 1) {
+            if (userInput >= MAX_OPTION - 1) { // to handle additional launcher requirements 
                 System.out.println("Launcher waiting on Program " + userInput + "...");
                 System.out.println();
-                p.waitFor();
+                p.waitFor(); //blocks until the launched program exits
 
-                int exitValue = p.exitValue();
+                int exitValue = p.exitValue(); // exitValue gets populated when process terminates
 
-                if (exitValue == EXIT_OPTION) {
+                //exitValue is then used for exit option to then print total cpu time 
+                if (exitValue == EXIT_OPTION) { 
 
                     p.info().totalCpuDuration().ifPresent(
                             d -> System.out
@@ -104,6 +110,7 @@ public class Launcher {
                 }
             }
 
+            //catches errors from InheritIo and ProcessBuilder
         } catch (IOException | InterruptedException e) {
             System.out.println("Failed, " + e.getMessage());
         }
