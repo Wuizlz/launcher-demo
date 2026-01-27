@@ -37,14 +37,14 @@ public class Launcher {
     private static final String MENU_TEXT = String.join("\n",
             "Please make a choice from the following list.",
             "  0: Quit",
-            "  1: Run Task Manager",
+            "  1: Run TaskManager",
             "  2: Run Notepad",
             "  3: Run Character Map",
             "  4: Run Sound Volume",
             "  5: Run \"About Windows\"",
             "  6: Run \"System Information\"",
             " *7: Run NS Lookup",
-            " *8: Run Cmd Shell",
+            " *8: Run Cmd shell",
             "Enter your choice: ");
 
     private static void handleInput() { // function to start prompt towards user
