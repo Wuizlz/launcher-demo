@@ -21,7 +21,8 @@ import java.util.Scanner;
 public class Launcher {
 
     /** @hidden */
-     Launcher(){/*to prevent defualt constructor*/}
+    Launcher() {
+        /* to prevent defualt constructor */}
 
     private final static Scanner in = new Scanner(System.in);
 
@@ -63,7 +64,8 @@ public class Launcher {
             "Enter your choice: ");
 
     /**
-     * Displays the menu and repeatedly prompts the user until they choose to quit or 
+     * Displays the menu and repeatedly prompts the user until they choose to quit
+     * or
      * when expected input is met
      * Ensures the input is an integer within the allowed range.
      */
@@ -71,31 +73,40 @@ public class Launcher {
         boolean done = false;
         while (!done) {
 
-            int userInput = -1;
+            String userInput;
             boolean valid = false;
 
             System.out.print(MENU_TEXT);
 
             while (!valid) {
-                if (in.hasNextInt()) {
-                    userInput = in.nextInt();
-                    if (userInput >= MIN_OPTION && userInput <= MAX_OPTION) {
+                userInput = in.nextLine().trim();
+                try {
+                    int input = Integer.parseInt(userInput);
+                    if (input >= 0 && input <= 8) {
                         valid = true;
-                    } else {
-                        System.out.print("Enter your choice: ");
+                        if (input == EXIT_OPTION) {
+                            done = true;
+                        } else {
+                            initializeProcess(input);
+                            System.out.println();
+                        }
+
                     }
-                } else {
-                    in.next();
-                    System.out.print("Enter your choice: ");
+                } catch (NumberFormatException e) {
+
                 }
-            }
-            if (userInput == EXIT_OPTION) {
-                done = true;
-            } else {
-                initializeProcess(userInput);
-                System.out.println();
+
+                System.out.print("Enter your choice: ");
             }
         }
+        /*
+         * if (userInput == EXIT_OPTION) {
+         * done = true;
+         * } else {
+         * initializeProcess(userInput);
+         * System.out.println();
+         * }
+         */
     }
 
     /**
@@ -110,7 +121,7 @@ public class Launcher {
         try {
 
             ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-            if (userInput >= MAX_OPTION - 1) { 
+            if (userInput >= MAX_OPTION - 1) {
                 /*
                  * for the sub-process to utilize parents IO field as well(causes a race of what
                  * to print to system
