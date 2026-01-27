@@ -64,6 +64,10 @@ If you want to call out the “siblings” wording explicitly, you can add:
 
 ## Running the demo
 
+https://github.com/user-attachments/assets/a3a8fa79-0576-4aa6-bd14-9bfb88b468b2
+
+
+
 From a command prompt in this directory:
 
 ```cmd
