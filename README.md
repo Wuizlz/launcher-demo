@@ -35,35 +35,56 @@ Notes:
 ## Process tree / activity monitor notes (for screenshots)
 
 <img width="395" height="251" alt="Screenshot 2026-01-26 at 10 20 02 PM" src="https://github.com/user-attachments/assets/cd8b2138-7c98-4b04-9a8e-78bbc6217ae0" />
+##Screenshot 1 (Option 2 → Notepad)
+In this screenshot there are two separate Windows Terminal sessions running the launcher.
+	•	Session A: explorer.exe → WindowsTerminal.exe → OpenConsole.exe → powershell.exe
+I cd to Desktop\CS33600\launcher-demo and run .\launcher_demo.cmd, which starts the jar (java.exe).
+Selecting option 2 launches Notepad, so you see:
+cmd/powershell → java.exe → Notepad.exe.
+	•	Session B: Same idea, but in a different folder:
+cd to Downloads\hw1 and run .\launcher_demo.cmd again, creating another shell → java.exe chain.
+
+So the repeated OpenConsole / powershell / cmd / java entries are just two independent terminal sessions, and Notepad appears as a child of the specific java.exe that launched it.
+
+Explorer ➜ Windows Terminal ➜ OpenConsole ➜ PowerShell/CMD ➜ java.exe ➜ Notepad.exe. Two separate terminal sessions are running the launcher from different directories.
+
+<img width="422" height="291" alt="image" src="https://github.com/user-attachments/assets/157bcc24-e234-49e3-ac69-db72649b8154" />
+
+##Screenshot 2 (Option 8 → spawns a new CMD → runs jar again)
+This screenshot starts the same way (Terminal session(s) running .\launcher_demo.cmd), but I select option 8, which launches another cmd.exe from inside the launcher.
+
+That’s why you now see an extra nested chain:
+	•	Main launcher path: … → powershell/cmd → java.exe
+	•	Option 8 creates: java.exe → cmd.exe
+	•	Inside that new CMD I run the launcher again, creating:
+cmd.exe → java.exe (a second Java process under the new CMD)
+
+So the “extra” cmd.exe → java.exe you see is expected: option 8 spawns a new command prompt, and running the script again in that prompt spawns a second Java process.
+
+Explorer ➜ Terminal ➜ OpenConsole ➜ PowerShell/CMD ➜ java.exe, then option 8 spawns a new cmd.exe, and running the script again creates an additional cmd.exe ➜ java.exe chain.
 
 
 ### Why siblings can appear
 
-Some process viewers label certain related processes as “siblings” even though they have a strict parent/child chain. This can happen due to:
+“Siblings” can appear because the viewer is not always showing a pure “who spawned who” tree — it may be showing a logical grouping of processes that cooperate closely.
 
-- **Job objects and IPC grouping**: tools may group related processes together to show logical relationships, not just strict parentage.
-- **Terminal host models**: in modern Windows terminals, the console host and the shell can be in separate processes, and the UI can make them look like siblings even if one is technically parented by a broker process.
+Here are the main reasons (in plain terms):
+	•	Job objects + IPC grouping (logical grouping):
+Windows can put related processes into the same Job object or tightly connect them via inter-process communication (IPC). Some tools then group them side-by-side because they “belong together,” even if one technically started the other.
+	•	Modern terminal architecture (broker/host split):
+With Windows Terminal, the “terminal” experience is split across multiple processes:
+	•	WindowsTerminal.exe = the UI
+	•	OpenConsole.exe / conhost.exe = console host plumbing (ConPTY)
+	•	cmd.exe / powershell.exe = the shell
+Depending on timing and how ConPTY is wired, a viewer may show cmd.exe and OpenConsole.exe as “siblings” under the same parent (or under a broker process) even though the actual startup chain still exists.
+	•	Reparenting / intermediate launchers:
+Sometimes a process is launched by a helper (a broker) and ends up logically associated with another process. The strict parent PID might point to the helper, while the UI groups it under the app you think launched it.
 
-A clear, simple way to describe it in your screenshot captions is:
-
-> “Explorer is the top-level parent because it launched the terminal. The terminal hosts `cmd.exe`, and `cmd.exe` starts the Java launcher (and any utilities it opens). Some viewers group these as siblings for UI/IPC reasons, even though the start order still follows this parent-child chain.”
-
-## Screenshot placeholder (Activity Monitor / Task Manager)
-
-Place your process tree screenshots in this section. When you add the images, the recommended caption format is:
-
-> “Explorer ➜ Terminal ➜ cmd.exe ➜ java.exe ➜ launcher/utility. Explorer is the original parent because it launched the terminal; some viewers show these as siblings for IPC or job-grouping reasons, but the launch order still follows this chain.”
-
-If you want to call out the “siblings” wording explicitly, you can add:
-
-> “Even when the viewer groups processes as siblings, it’s still accurate to explain Explorer as the top-level parent and the terminal/cmd/utility as the child chain.”
+Even if the UI makes two processes look like siblings, it doesn’t mean they’re unrelated — it usually means they’re part of the same job/terminal session and the tool is prioritizing a logical view over strict parent/child spawning.
 
 ## Running the demo
 
 https://github.com/user-attachments/assets/a3a8fa79-0576-4aa6-bd14-9bfb88b468b2
-<img width="422" height="291" alt="image" src="https://github.com/user-attachments/assets/157bcc24-e234-49e3-ac69-db72649b8154" />
-
-
 
 
 From a command prompt in this directory:
