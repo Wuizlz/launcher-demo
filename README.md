@@ -133,7 +133,7 @@ Or directly:
 
 ```cmd
 java -jar Launcher.jar
-AND
+OR
 javac Launcher.java
 java Launcher
 ```
