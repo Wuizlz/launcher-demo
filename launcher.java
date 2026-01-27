@@ -18,12 +18,8 @@ import java.util.Scanner;
  * </p>
  *
  */
-public class Launcher {
-
-    /** @hidden */
-    Launcher() {
-        /* to prevent defualt constructor */}
-
+public class Launcher 
+{
     private final static Scanner in = new Scanner(System.in);
 
     // exit option
@@ -38,7 +34,9 @@ public class Launcher {
     private final static String system32 = systemDrive + "\\Windows\\system32\\";
 
     // array of executables
-    private final static String[] cmds = { "Taskmgr.exe",
+    private final static String[] cmds = 
+    { 
+            "Taskmgr.exe",
             "notepad.exe",
             "charmap.exe",
             "Sndvol.exe",
@@ -66,10 +64,11 @@ public class Launcher {
     /**
      * Displays the menu and repeatedly prompts the user until they choose to quit
      * or
-     * when expected input is met
+     * when expected input is met.
      * Ensures the input is an integer within the allowed range.
      */
-    public static void handleInput() {
+    public static void handleInput() 
+    {
         boolean done = false;
         while (!done) {
 
@@ -78,35 +77,35 @@ public class Launcher {
 
             System.out.print(MENU_TEXT);
 
-            while (!valid) {
-                userInput = in.nextLine().trim();
-                try {
-                    int input = Integer.parseInt(userInput);
-                    if (input >= 0 && input <= 8) {
-                        valid = true;
-                        if (input == EXIT_OPTION) {
-                            done = true;
-                        } else {
-                            initializeProcess(input);
-                            System.out.println();
-                        }
+            while (!valid) 
+                {
+                    userInput = in.nextLine().trim();
+                    try 
+                    {
+                        int input = Integer.parseInt(userInput);
+                        if (input >= MIN_OPTION && input <= MAX_OPTION) 
+                            {
+                                valid = true;
+                                if (input == EXIT_OPTION) 
+                                {
+                                    done = true;
+                                } 
+                                else 
+                                {
+                                initializeProcess(input);
+                                System.out.println();
+                                }
 
+                            }
+                    } 
+                    catch (NumberFormatException e) 
+                    {
+                    System.out.print("Enter your choice: ");
                     }
-                } catch (NumberFormatException e) {
 
-                }
-
-                System.out.print("Enter your choice: ");
+                
             }
         }
-        /*
-         * if (userInput == EXIT_OPTION) {
-         * done = true;
-         * } else {
-         * initializeProcess(userInput);
-         * System.out.println();
-         * }
-         */
     }
 
     /**
@@ -117,22 +116,26 @@ public class Launcher {
      *
      * @param userInput the validated menu option chosen by the user (1-8)
      */
-    public static void initializeProcess(int userInput) {
-        try {
+    public static void initializeProcess(int userInput) 
+    {
+        try 
+        {
 
             ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-            if (userInput >= MAX_OPTION - 1) {
+            if (userInput >= MAX_OPTION - 1) 
+                {
                 /*
                  * for the sub-process to utilize parents IO field as well(causes a race of what
                  * to print to system
                  */
                 pb.inheritIO();
-            }
+                }
 
             Process p = pb.start();
             System.out.println("Started program " + userInput + " with pid = " + p.pid());
 
-            if (userInput >= MAX_OPTION - 1) {
+            if (userInput >= MAX_OPTION - 1) 
+            {
                 System.out.println("Launcher waiting on Program " + userInput + "...");
                 System.out.println();
                 p.waitFor();
@@ -144,7 +147,8 @@ public class Launcher {
                  * time
                  * then goes back to the top of handleInput
                  */
-                if (exitValue == EXIT_OPTION) {
+                if (exitValue == EXIT_OPTION) 
+                {
 
                     p.info().totalCpuDuration().ifPresent(
                             d -> System.out
@@ -153,7 +157,9 @@ public class Launcher {
                 }
             }
 
-        } catch (IOException | InterruptedException e) {
+        } 
+        catch (IOException | InterruptedException e) 
+        {
             System.out.println("Failed, " + e.getMessage());
         }
     }
@@ -163,7 +169,8 @@ public class Launcher {
      *
      * @param args command-line arguments (not used)
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         handleInput();
     }
 }
