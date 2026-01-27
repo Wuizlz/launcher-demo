@@ -61,6 +61,8 @@ If you want to call out the “siblings” wording explicitly, you can add:
 ## Running the demo
 
 https://github.com/user-attachments/assets/a3a8fa79-0576-4aa6-bd14-9bfb88b468b2
+<img width="422" height="291" alt="image" src="https://github.com/user-attachments/assets/157bcc24-e234-49e3-ac69-db72649b8154" />
+
 
 
 
