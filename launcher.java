@@ -100,7 +100,7 @@ public class Launcher {
                     p.info().totalCpuDuration().ifPresent(
                             d -> System.out
                                     .println("Program " + userInput + " exited with return value 0 and ran for "
-                                            + d.toMillis() + " cpu miliseconds\n"));
+                                            + d.toMillis() + " cpu miliseconds"));
                 }
             }
 
