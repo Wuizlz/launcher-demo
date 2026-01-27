@@ -63,7 +63,8 @@ public class Launcher {
             "Enter your choice: ");
 
     /**
-     * Displays the menu and repeatedly prompts the user until they choose to quit.
+     * Displays the menu and repeatedly prompts the user until they choose to quit or 
+     * when expected input is met
      * Ensures the input is an integer within the allowed range.
      */
     public static void handleInput() {
@@ -109,7 +110,7 @@ public class Launcher {
         try {
 
             ProcessBuilder pb = new ProcessBuilder(system32 + cmds[userInput - 1]);
-            if (userInput >= MAX_OPTION - 1) { // specifically for launcher programs
+            if (userInput >= MAX_OPTION - 1) { 
                 /*
                  * for the sub-process to utilize parents IO field as well(causes a race of what
                  * to print to system
